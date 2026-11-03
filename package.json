@@ -1,0 +1,28 @@
+{
+  "name": "ibinabo-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/dev.ts",
+    "seed": "tsx scripts/seed.ts",
+    "test": "vitest run",
+    "build": "tsc --noEmit",
+    "zip-skills": "cd skills && zip -r ../skills.zip . -x '.*'",
+    "smoke": "tsx scripts/smoke.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "googleapis": "^189.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
