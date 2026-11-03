@@ -9,7 +9,8 @@
     "test": "vitest run",
     "build": "tsc --noEmit",
     "zip-skills": "cd skills && zip -r ../skills.zip . -x '.*'",
-    "smoke": "tsx scripts/smoke.ts"
+    "smoke": "tsx scripts/smoke.ts",
+    "chord": "tsx scripts/chord.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",
