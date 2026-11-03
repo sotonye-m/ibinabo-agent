@@ -36,10 +36,16 @@ Keep 2–3 strong entries for the submission. Log everything while building; tri
 - **Fix or workaround:** None needed for the agent to work. For debugging I rely on our own `[tool]` log lines in Vercel.
 - **What Chord should change:** classify E.164 numbers (a leading `+` and country code) as `phone` rather than `card`, or show the redaction type next to the field name. An operator debugging an agent in Nigeria will see "card" and assume a payment card was leaked into a prompt, which is a false alarm in a payments product.
 
+### 5. MCP tool calls carry no caller identity, so "who is this trader" rests on the model (3 Nov, ~18:36)
+- **What happened:** I needed to know whether Chord tells the MCP server who the end user is. Every tool takes `phone`, and owner tools must not be callable by a trader.
+- **How I found the cause:** I logged the full incoming request (`[mcp-probe]`, with Vercel's proxy headers filtered out) for a live turn. The body is only `{"method":"tools/call","params":{"name":"get_account","arguments":{"phone":"+2348030000001"}}}`, and the headers are only `accept`, `content-type`, `user-agent: Java-http-client/23.0.2` and an invocation id. There is no sender id, thread id or channel. The model filled in `phone` from the conversation's `sender_id` without being asked, which is convenient but means identity is whatever the model passes.
+- **Fix or workaround:** (1) The skills now say: use the number the chat comes from, and never switch to a number the person types. (2) Owner tools also check `OWNER_PHONES` server-side, with a PIN fallback. (3) Limitation stated in GO_LIVE: a prompt-injection or a confused model could still pass another trader's number. In a payments product that's the main residual risk.
+- **What Chord should change:** forward a signed, model-independent caller context on every MCP call, e.g. `X-Chord-Sender-Id`, `X-Chord-Channel` and `X-Chord-Thread-Id`, plus an HMAC signature header using the MCP server's auth secret. Then the tool server can authorise against the real sender rather than a model-supplied argument. This is the single change that would make Chord safe for account-level tools such as balances and payments.
+
 ---
 
 ## Probes to record
-- [ ] Does Chord pass the WhatsApp sender's number to MCP tools / the model?
+- [x] Does Chord pass the sender's number to MCP tools / the model? **Model: yes (sender_id is visible; it used it unprompted via the external-chat API). MCP request: no — only tool args (note 5). Simulator: TBC.**
 - [ ] Are all skills applied per reply, or one picked by description?
 - [ ] Credits per simulator turn
 - [ ] `handover_to_human` available in the simulator?
