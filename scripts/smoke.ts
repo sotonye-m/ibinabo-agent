@@ -31,7 +31,7 @@ const pd = await call("get_payment_details", { phone: TOBI, amount_naira: order.
 await call("check_payments", { phone: TOBI });
 
 if (process.env.PAYSTACK_SECRET_KEY?.startsWith("sk_test_mock")) {
-  const body = JSON.stringify({ event: "charge.success", data: { reference: pd.reference, amount: pd.amount_kobo, paid_at: new Date().toISOString(), channel: "bank_transfer", metadata: { retailer_id: acct.customer_id }, customer: { email: "r001@ibinabo.test" } } });
+  const body = JSON.stringify({ event: "charge.success", data: { reference: pd.reference, amount: pd.amount_kobo, paid_at: new Date().toISOString(), channel: "bank_transfer", metadata: { retailer_id: acct.customer_id }, customer: { email: "r001.ibinabo@example.com" } } });
   for (const label of ["first", "duplicate"]) {
     const res = await fetch(`${base}/webhooks/paystack`, { method: "POST", headers: { "content-type": "application/json", "x-paystack-signature": sign(body) }, body });
     console.log(`\n▶ webhook (${label}) → ${res.status} ${await res.text()}`);

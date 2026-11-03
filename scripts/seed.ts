@@ -84,7 +84,7 @@ function build(): Db {
     dva_bank: "",
     dva_account_number: "",
     paystack_customer_code: "",
-    email: `${p.id.toLowerCase()}@ibinabo.test`,
+    email: `${p.id.toLowerCase()}.ibinabo@example.com`, // Paystack rejects reserved TLDs like .test
     last_stock_check_at: "",
   }));
 

@@ -70,7 +70,7 @@ TIMEZONE=Africa/Lagos
 
 ## 5. Google Sheet schema (one sheet, tabs below; row 1 = headers)
 
-**Retailers**: `retailer_id` (R001…) · `name` · `shop_name` · `phone` (E.164) · `market` · `credit_limit_kobo` · `tier` · `dva_bank` · `dva_account_number` · `paystack_customer_code` · `email` (synthetic: `r001@ibinabo.test`) · `last_stock_check_at`
+**Retailers**: `retailer_id` (R001…) · `name` · `shop_name` · `phone` (E.164) · `market` · `credit_limit_kobo` · `tier` · `dva_bank` · `dva_account_number` · `paystack_customer_code` · `email` (synthetic: `r001.ibinabo@example.com`; Paystack rejects `.test`) · `last_stock_check_at`
 
 **Products**: `sku` · `name` · `unit` (carton/bag/keg/pack) · `price_kobo` · `units_on_hand` · `reorder_point`
 
