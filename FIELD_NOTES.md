@@ -45,7 +45,7 @@ Keep 2–3 strong entries for the submission. Log everything while building; tri
 ---
 
 ## Probes to record
-- [x] Does Chord pass the sender's number to MCP tools / the model? **Model: yes (sender_id is visible; it used it unprompted via the external-chat API). MCP request: no — only tool args (note 5). Simulator: TBC.**
+- [x] Does Chord pass the sender's number to MCP tools / the model? **Model: yes (sender_id is visible; it used it unprompted via the external-chat API). MCP request: no — only tool args (note 5). Simulator: no. The thread's `channel_participant_id` is an opaque `partner_…` id and only the typed name is in `remote_participant_metadata`. With skill v3 the agent asks for the registered number before calling any tool (thread 6aea40c5…).**
 - [ ] Are all skills applied per reply, or one picked by description?
 - [ ] Credits per simulator turn
 - [ ] `handover_to_human` available in the simulator?
