@@ -36,8 +36,10 @@ function bearer(req: Request, res: Response, next: NextFunction) {
 /** Probe log: what Chord actually sends (headers minus auth, body). Answers "does Chord pass the sender's number?". */
 function probe(req: Request, _res: Response, next: NextFunction) {
   if (process.env.MCP_PROBE_LOG !== "false") {
-    const headers = { ...req.headers, authorization: req.headers.authorization ? "[redacted]" : undefined };
-    console.log(`[mcp-probe] ${JSON.stringify({ headers, body: req.body })}`.slice(0, 4000));
+    // Drop platform noise (Vercel/proxy headers, incl. the OIDC token) and the bearer token.
+    const NOISE = /^(x-vercel-|x-forwarded-|x-real-ip|forwarded|host$|content-length|accept-encoding|connection|authorization)/i;
+    const headers = Object.fromEntries(Object.entries(req.headers).filter(([k]) => !NOISE.test(k)));
+    console.log(`[mcp-probe] ${JSON.stringify({ body: req.body, headers })}`.slice(0, 4000));
   }
   next();
 }

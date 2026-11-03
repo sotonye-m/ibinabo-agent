@@ -191,7 +191,7 @@ async function chat(phone: string, session: string, text: string) {
   const t0 = Date.now();
   const r = await api("POST", "/v1/external-chat/messages", { workspace_id: WS, teammate_id: TM || undefined, sender_id: phone, session_id: session, display_name: phone, text });
   console.log(`[${Date.now() - t0}ms] thread ${r.thread_id}`);
-  for (const s of r.steps ?? []) console.log(`  · ${s.tool ?? s.name ?? s.type} ${s.success === false ? "✗" : "✓"} ${s.latency_ms ?? ""}ms ${String(s.instruction ?? "").slice(0, 160)}`);
+  for (const s of r.steps ?? []) console.log(`  · ${s.tool_name ?? s.title} ${s.success === false ? "✗" : "✓"} ${s.latency_ms ?? ""}ms ${String(s.instruction ?? "").slice(0, 160)}`);
   console.log(`\n${r.reply ?? `(no reply: ${r.reason})`}\n`);
 }
 
