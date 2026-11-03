@@ -64,3 +64,5 @@ app.get("/mcp", methodNotAllowed);
 app.delete("/mcp", methodNotAllowed);
 
 app.use((_req, res) => res.status(404).json({ status: "not_found" }));
+
+export default app;
