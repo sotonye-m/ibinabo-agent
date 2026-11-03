@@ -10,7 +10,8 @@
     "build": "tsc --noEmit",
     "zip-skills": "cd skills && zip -r ../skills.zip . -x '.*'",
     "smoke": "tsx scripts/smoke.ts",
-    "chord": "tsx scripts/chord.ts"
+    "chord": "tsx scripts/chord.ts",
+    "chord:setup": "tsx scripts/chord.ts setup"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",

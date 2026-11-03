@@ -36,7 +36,7 @@ Offline mode: `DB_BACKEND=file` stores data in `data/db.json`, and `PAYSTACK_SEC
 
 Deploy: `npx vercel deploy --prod`, set the env vars in Vercel, then point Paystack's test webhook at `https://<app>/webhooks/paystack`.
 
-Chord: `npm run chord -- register` (registers the MCP server, attaches it to the teammate, runs discovery and health), `npm run chord -- skills` (uploads and publishes the skills), `npm run chord -- chat +2348030000001 t1 "Abeg send me 5 cartons Indomie"` (one turn, printing the reply and tool steps).
+Chord: create an API key in the Chord app (permissions: `teammate:read`, `teammate:create`, `teammate:update`, `mcp:create`, `mcp:read`, `mcp:update`, `orchestrator:chat`) and put it in `.env` as `CHORD_API_KEY`. Then `npm run chord:setup`. It finds the workspace, finds or creates the "Ibinabo Desk" teammate, uploads, publishes and includes the three skills, registers the MCP server at `PUBLIC_URL` (plus discovery and health), activates the teammate, and writes `CHORD_WORKSPACE_ID`, `CHORD_TEAMMATE_ID` and `CHORD_MCP_SERVER_ID` into `.env`. It's safe to re-run, for example after editing a skill. Test a turn with `npm run chord -- chat +2348030000001 t1 "Abeg send me 5 cartons Indomie"`.
 
 ## Demo accounts (seeded, synthetic)
 | Who | Phone | Notes |
