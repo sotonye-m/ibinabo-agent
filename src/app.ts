@@ -12,7 +12,7 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", service: "ibinabo-desk", backend: process.env.DB_BACKEND ?? "sheets", time: new Date().toISOString() });
 });
 
-app.get("/paid", (_req, res) => {
+app.get(["/paid", "/webhooks/paid"], (_req, res) => {
   res.type("html").send(`<!doctype html><meta name="viewport" content="width=device-width"><title>Payment received</title>
 <body style="font-family:system-ui;max-width:28rem;margin:4rem auto;padding:0 1rem;text-align:center">
 <h1>Thank you</h1><p>Your payment is being confirmed with Ibinabo Distribution.</p>
