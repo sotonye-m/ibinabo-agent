@@ -30,6 +30,12 @@ Keep 2–3 strong entries for the submission. Log everything while building; tri
 - **Fix or workaround:** Seeded emails are now `r001.ibinabo@example.com`. Petty traders often have no email, so a real deployment would generate one per trader in the same way.
 - **What Chord should change:** when a tool returns `status: system_error` with a message, Chord could show the failing tool and message in the operator's thread view. That way a broken payment link shows up before a trader complains, without anyone opening Vercel logs.
 
+### 4. Chord's step redaction labels a Nigerian phone number as a card number (3 Nov, ~18:32)
+- **What happened:** The first live turn through `POST /v1/external-chat/messages` (sender `+2348030000001`, "Good morning. Wetin be my balance?") worked: the agent called `get_account` and answered correctly in Pidgin. But the tool step in the response showed its input as `{"phone": "+[REDACTED:card]"}`.
+- **How I found the cause:** I compared Chord's `steps[].instruction` with our own server log for the same call. The server received the full phone number, so the tool call itself was fine; only Chord's displayed copy was masked. A 13-digit `+234…` number looks enough like a card number (PAN) to trip the masking.
+- **Fix or workaround:** None needed for the agent to work. For debugging I rely on our own `[tool]` log lines in Vercel.
+- **What Chord should change:** classify E.164 numbers (a leading `+` and country code) as `phone` rather than `card`, or show the redaction type next to the field name. An operator debugging an agent in Nigeria will see "card" and assume a payment card was leaked into a prompt, which is a false alarm in a payments product.
+
 ---
 
 ## Probes to record
