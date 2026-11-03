@@ -2,6 +2,7 @@
  * Chord control script (API: https://api.chordhq.xyz). Env: CHORD_API_KEY, CHORD_WORKSPACE_ID,
  * CHORD_TEAMMATE_ID, PUBLIC_URL, MCP_BEARER_TOKEN, optional CHORD_MCP_SERVER_ID.
  *
+ *   npm run chord -- ids                   print teammate + workspace ids for your API key
  *   npm run chord -- register              register (or update) the MCP server, then discover + health
  *   npm run chord -- check                 discover tools + health for CHORD_MCP_SERVER_ID
  *   npm run chord -- skills                upload every skills/<name>/SKILL.md as a draft and publish it
@@ -95,11 +96,16 @@ async function chat(phone: string, session: string, text: string) {
 }
 
 const [cmd, ...rest] = process.argv.slice(2);
-if (!KEY || !WS) {
-  console.error("Set CHORD_API_KEY and CHORD_WORKSPACE_ID in .env");
+if (!KEY || (!WS && cmd !== "ids" && cmd !== "get")) {
+  console.error(KEY ? "Set CHORD_WORKSPACE_ID in .env (run: npm run chord -- ids)" : "Set CHORD_API_KEY in .env");
   process.exit(1);
 }
-if (cmd === "register") await register();
+if (cmd === "ids") {
+  const r = await api("GET", "/v1/teammates");
+  const list: any[] = Array.isArray(r) ? r : r.teammates ?? r.items ?? r.data ?? [];
+  if (!list.length) console.log("No teammates yet. Create one in the Chord app first.\n", JSON.stringify(r).slice(0, 500));
+  for (const t of list) console.log(`CHORD_TEAMMATE_ID=${t.id}   # ${t.display_name ?? t.email ?? ""} (${t.status ?? ""})\nCHORD_WORKSPACE_ID=${t.workspace_id ?? "?"}\n`);
+} else if (cmd === "register") await register();
 else if (cmd === "check") await check(process.env.CHORD_MCP_SERVER_ID!);
 else if (cmd === "skills") await skills();
 else if (cmd === "chat") await chat(rest[0], rest[1], rest.slice(2).join(" "));
