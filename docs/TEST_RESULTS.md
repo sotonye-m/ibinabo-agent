@@ -53,7 +53,7 @@ The arithmetic checks out: 305,500 − 49,000 + 123,500 = 380,000, which equals 
 ## What this demonstrates
 - **The credit limit is enforced in code.** The agent couldn't approve the order and offered exactly the two options the tool returned (unlock ₦49,000 or order at most ₦74,500).
 - **Payments are confirmed by Paystack, not by the trader's word.** "I don pay" triggered `check_payments`, which found the payment that the signed webhook had already recorded. The agent never asked for a screenshot.
-- **Identity:** the simulator sends an opaque sender id (`partner_…`), so the agent asked for the registered number before calling any tool (see FIELD_NOTES #5).
+- **Identity:** the simulator sends an opaque sender id (`partner_…`), so the agent asked for the registered number before calling any tool (see FIELD_NOTES #1).
 - **Tone:** short WhatsApp-style messages, "Ma", and the overdue invoice mentioned once at the end.
 
 ## Observations / follow-ups

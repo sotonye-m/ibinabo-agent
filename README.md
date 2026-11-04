@@ -4,6 +4,8 @@
 
 **Problem.** Ibinabo Distribution (fictional) supplies FMCG goods on credit to ~40 petty traders around Mile 1 Market, Port Harcourt. The owner tracks who owes what, who is actually selling, and who to stop giving credit to in notebooks and WhatsApp threads, and he loses money to fake transfer alerts. This Chord agent gives each trader a Paystack payment link, handles balances, part-payments, promises and reorders against a credit limit on WhatsApp, and gives the owner a live scorecard of each trader's cash-return speed and sell-through, with suggested limit changes he approves. Left out: forecasting, automatic credit decisions, multi-warehouse, real dispatch.
 
+**Links:** [Repo](https://github.com/sotonye-m/ibinabo-agent) · [Demo video (2:46)](docs/demo/ibinabo-demo.mp4) · [Try it in the WhatsApp simulator](https://chat.tsglabs.dev/c/zk4DR6lKuO34yNs1YgQ6Qjp-) · [Live server](https://ibinabo-agent.vercel.app/health)
+
 Pattern borrowed from Khatabook/OkCredit (credit ledger + WhatsApp reminders with a pay link) and Pix payment requests over WhatsApp.
 
 ## How it fits together
@@ -44,10 +46,16 @@ Chord: create an API key in the Chord app (permissions: `teammate:read`, `teamma
 | Mama Tobi Provisions | +2348030000001 | ₦74,500 under her limit, so "5 Indomie + 2 Peak" is blocked and needs ₦49,000 to unlock |
 | Iya Basira Stores | +2348030000002 | Tier C: over limit, broke a promise, 23 days to pay |
 | Ngozi Supermarket | +2348030000006 | Open disputed invoice |
-| Owner | `OWNER_PHONES` | Portfolio, scorecards, limit changes |
+| Owner (Mr Ibinabo Briggs) | 08030000000 | Portfolio, scorecards, limit changes |
 
 ## How AI tools were used
 Claude Code (Opus) wrote the server, tests, seed and scripts from a spec I wrote first ([docs/SPEC.md](docs/SPEC.md)), working against the Chord OpenAPI document. I set the rules (code does the maths, idempotent payments, owner approval for limits), reviewed the tool contracts, and ran the scenarios in [docs/TEST_SCRIPTS.md](docs/TEST_SCRIPTS.md).
+
+## Demo and evidence
+- [Demo video](docs/demo/ibinabo-demo.mp4), recorded headless from the live simulator chat: trader reorder → blocked → pay → approved, then the owner's report, scorecard and limit cut. Re-record with [scripts/demo/](scripts/demo/).
+- [Demo transcript](docs/demo/transcript.json) · [Test results](docs/TEST_RESULTS.md)
+- Live MCP server: `https://ibinabo-agent.vercel.app/mcp` (bearer auth) · simulator chat: https://chat.tsglabs.dev/c/zk4DR6lKuO34yNs1YgQ6Qjp-
+- In the simulator, give 08030000001 as Mama Tobi or 08030000000 as the owner when the agent asks for your number.
 
 ## Docs
 [FIELD_NOTES.md](FIELD_NOTES.md) (deployment field notes) · [GO_LIVE.md](GO_LIVE.md) (note for the owner) · [docs/CHORD_NOTES.md](docs/CHORD_NOTES.md)
