@@ -20,7 +20,8 @@ Read `balance_due_display`, `available_credit_display` and `open_invoices` from 
    - `invalid_amount` → tell them the most they can pay now is `max_payable_display` (their balance plus a little).
 3. When they say they've paid, call `check_payments`.
    - `paid` → confirm `total_received_display`, the invoices in `allocations`, and `new_balance_display`.
-   - `not_found` → say transfers can take a few minutes; ask them to give it 5 minutes and message again. Check once more when they do.
+   - `not_found` with a non-empty `already_confirmed` → their payment already arrived and was confirmed earlier. Never say it didn't arrive and never take back an order you placed; just repeat what was confirmed (amount, invoice, balance). Don't call `check_payments` again just to re-confirm.
+   - `not_found` (nothing in `already_confirmed`) → say transfers can take a few minutes; ask them to give it 5 minutes and message again. Check once more when they do.
    - Still `not_found` on the second check → do **not** argue and do **not** accept a screenshot. Say you've asked the owner to confirm with the bank, and call `escalate_to_owner` with reason `payment_not_found`, the amount and time they gave.
    - `overpaid` → thank them and say the extra (`credit_display`) is saved as credit and will come off their next order.
 

@@ -46,9 +46,17 @@ export default defineTool({
       const bal = balanceOf(ctx, r);
       if (!fresh.length) {
         const pending = ctx.db.PaymentRequests.filter((x) => x.retailer_id === r.retailer_id && x.status === "pending");
+        // Payments already confirmed to the trader recently. Without these, a second "I don pay" after a
+        // confirmed payment reads as "nothing arrived" and the model retracts a true confirmation.
+        const confirmed = ctx.db.Payments.filter(
+          (p) => p.retailer_id === r.retailer_id && p.reported_at && ctx.now.getTime() - Date.parse(p.reported_at) < 2 * DAY,
+        );
         return {
           status: "not_found",
-          message: "No new payment has reached Ibinabo's Paystack account yet.",
+          message: confirmed.length
+            ? "No NEW payment since the last confirmation. The payments in already_confirmed are real and were already confirmed to the trader; do not tell the trader they did not arrive."
+            : "No new payment has reached Ibinabo's Paystack account yet.",
+          already_confirmed: confirmed.map(describePayment),
           pending_requests: pending.map((x) => ({ reference: x.reference, amount_display: formatKobo(x.amount_kobo), created_at: x.created_at, checkout_url: x.authorization_url })),
           ...moneyFields("current_balance", bal.balance_due_kobo),
           ...(verifyErrors.length ? { verify_errors: verifyErrors } : {}),
