@@ -1,0 +1,52 @@
+[
+  {
+    "who": "trader",
+    "you": "Good morning. Abeg send me 5 cartons Indomie and 2 cartons Peak milk.",
+    "agent": "08:47\nGood morning Ma. I need your registered phone number to pull up your account. Your sender ID is not a phone number, so please send the number you registered with Ibinabo Distribution (it starts with +234 or 0).\n\nOnce I have it, I'll confirm your order of 5 cartons Indomie and 2 cartons Peak milk and place it.\n08:47"
+  },
+  {
+    "who": "trader",
+    "you": "08030000001",
+    "agent": "08:48\nThank you, Mama Tobi. Just so I have it right, your order is:\n\n- 5 cartons Indomie\n- 2 cartons Peak milk\n\nShall I place it? Reply YES to go ahead.\n08:48"
+  },
+  {
+    "who": "trader",
+    "you": "Yes o",
+    "agent": "08:48\nMama Tobi, the order didn't go through. It would take you past your ₦380,000 credit limit.\n\nYour order:\n- 5 cartons Indomie at ₦13,500 each: ₦67,500\n- 2 cartons Peak milk at ₦28,000 each: ₦56,000\n- Total: ₦123,500\n\nYour balance is ₦305,500 and your available credit is ₦74,500. You have two options:\n\n1. Pay ₦49,000 now, and I place the full order straight after.\n2. Reduce the order to ₦74,500 or less.\n\nAlso, invoice INV-0007 (₦146,000) is due today, 4 Nov.\n\nWhich option do you prefer, Ma?\n08:48"
+  },
+  {
+    "who": "trader",
+    "you": "I go pay the 49k",
+    "agent": "08:49\nHere is your payment link for ₦49,000, Ma:\n\nhttps://checkout.paystack.com/zjwhh5ps1pm8vgz\n\nYou can pay by bank transfer, card or USSD. You don't need to send a screenshot, because the payment confirms itself.\n\nMessage me when you have paid, and I will place your 5 cartons Indomie and 2 cartons Peak milk straight away.\n\nYour invoice INV-0007 (₦146,000) is also due today, 4 Nov.\n08:49"
+  },
+  {
+    "who": "trader",
+    "you": "I don pay",
+    "agent": "08:49\nYour payment of ₦49,000 has come in, Mama Tobi, and your order is placed.\n\n- 5 cartons Indomie: ₦67,500\n- 2 cartons Peak milk: ₦56,000\n- Total: ₦123,500 (invoice INV-0056), due Sat 14 Nov\n\nYour new balance is ₦380,000, which is your full credit limit, so you have no available credit until you pay some of it. The warehouse will arrange delivery.\n\nMa, how many cartons of Indomie do you have left in your shop now?\n08:49"
+  },
+  {
+    "who": "owner",
+    "you": "Good evening. How business dey this week?",
+    "agent": "08:50\nThe sender ID isn't a phone number, so I need the registered number before I can look up anything.\n\nGood evening Sir. Please send the phone number registered with Ibinabo Distribution so I can pull up the details.\n08:50"
+  },
+  {
+    "who": "owner",
+    "you": "08030000000",
+    "agent": "08:50\nGood evening Mr Briggs. Here is the last 7 days:\n\n- **Cash collected:** ₦730,500\n- **Cash outstanding:** ₦2,083,700 (₦214,500 of that is under dispute)\n- **Lagging traders:** 2 of 8\n  - Iya Basira: ₦355,500, 23 days to pay, over credit limit\n  - Tamuno George: ₦135,000, 28.7 days to pay, broke 1 promise\n- **Low stock:** Kings vegetable oil 25L (12 kegs, reorder point 15) and Eva water (30 packs, reorder point 40)\n\n**Open issue:** Ngozi Eze says INV-0045 is wrong. She received 2 cartons of Peak milk but was invoiced for 3 (ticket T-0001).\n\n**Suggestion:** Pause new credit for Iya Basira until ₦230,500 is cleared, and set her limit at ₦125,000.\n\nDo you want me to open her scorecard or change her limit?\n08:51"
+  },
+  {
+    "who": "owner",
+    "you": "How Iya Basira dey do?",
+    "agent": "08:51\nIya Basira Stores (Tier C):\n\n- **Balance vs limit:** ₦355,500 against a ₦250,000 limit, so she is over limit.\n- **Cash return rate:** 80%. She has paid back ₦80 of every ₦100 of goods in the last 30 days.\n- **Average days to pay:** 23 days.\n- **Sell-through:** 0.4 units a day. This is inferred from her reorder gaps, not from her stock check-ins, so treat it as a rough figure.\n- **Promise reliability:** 0%. She broke 1 promise.\n- **Flags:** invoice overdue 17 days, slow seller.\n- **Last order:** 2 days ago.\n\n**Suggestion:** Pause new credit until ₦230,500 is cleared, which brings her balance below ₦125,000. Cut her limit from ₦250,000 to ₦125,000.\n\nDo you want me to reduce her limit to ₦125,000? Reply YES to confirm.\n08:51"
+  },
+  {
+    "who": "owner",
+    "you": "Cut her limit to the suggested amount",
+    "agent": "08:51\nJust to confirm: reduce Iya Basira Stores' credit limit from ₦250,000 to ₦125,000? Reply YES and I will make the change.\n08:52"
+  },
+  {
+    "who": "owner",
+    "you": "YES",
+    "agent": "08:52\nDone, Sir. Iya Basira's credit limit is now ₦125,000, down from ₦250,000.\n\nShe is still at ₦355,500, so she cannot take new credit until she pays down below the new limit. Do you want to check anyone else?\n08:52"
+  }
+]
